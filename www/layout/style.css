@@ -1,0 +1,770 @@
+@font-face {
+	font-family: Coolvetica;
+	font-style: normal;
+	font-weight: normal;
+	src: url(fonts/Coolvetica-Regular.woff2) format("woff2");
+}
+
+@font-face {
+	font-family: Coolvetica;
+	font-style: italic;
+	font-weight: normal;
+	src: url(fonts/Coolvetica-Italic.woff2) format("woff2");
+}
+
+@keyframes scroll {
+	from {
+		background-position: 0 50%;
+	}
+
+	to {
+		background-position: 192px 50%;
+	}
+}
+
+:root {
+	--load-light: #800000;
+	--load-dark: #400000;
+	--save-light: #008000;
+	--save-dark: #004000;
+	--characters: #c0c000;
+	--slot-light: #606060;
+	--slot-dark: #303030;
+	--playTime-light: #000080;
+	--playTime-dark: #000040;
+	--score-light: #c000c0;
+	--score-dark: #800080;
+	--character-light: #c06000;
+	--character-dark: #803000;
+	--timeOfDay-light: #0060c0;
+	--timeOfDay-dark: #003080;
+	--chaosRings-light: #006060;
+	--chaosRings-dark: #003030;
+	--attractions-light: #600060;
+	--attractions-dark: #300030;
+}
+
+a {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+a#link, button span, span.title {
+	display: none;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+button {
+	background: none;
+	border: 0;
+	border-radius: 0.25em;
+	color: inherit;
+	cursor: pointer;
+	font: inherit;
+}
+
+button#blue {
+	background-image: url(../images/chaosring-blue.png);
+}
+
+button#cyan {
+	background-image: url(../images/chaosring-cyan.png);
+}
+
+button#green {
+	background-image: url(../images/chaosring-green.png);
+}
+
+button#pink {
+	background-image: url(../images/chaosring-pink.png);
+}
+
+button#purple {
+	background-image: url(../images/chaosring-purple.png);
+}
+
+button#yellow {
+	background-image: url(../images/chaosring-yellow.png);
+}
+
+button.chaosRing {
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	background-size: 52px 62px;
+	color: inherit;
+	height: 62px;
+	margin: 0.25em 0.25em 1em;
+	padding: 0;
+	transition: 0.5s filter;
+	width: 52px;
+}
+
+button.chaosRing.empty {
+	filter: grayscale(100%);
+}
+
+button.close {
+	background: #000;
+	color: inherit;
+	line-height: 100%;
+	padding: 0.25em 1em;
+}
+
+button.close, button.slot {
+	background: #c0c0c0;
+	border: 2px solid #000;
+	color: #fff;
+	line-height: 100%;
+	text-shadow: inherit;
+}
+
+button.close:hover, button.slot:hover:not(.active) {
+	background: #fff;
+	color: inherit;
+}
+
+button.slot {
+	font-size: 1.25rem;
+	height: 2em;
+	width: 2em;
+}
+
+button.slot.active {
+	background: #000;
+	color: inherit;
+	cursor: default;
+	text-shadow: 2px 2px var(--slot-light);
+}
+
+button[disabled] {
+	cursor: default;
+}
+
+button[disabled], input[disabled] {
+	opacity: 0.25;
+	transition: 0.5s opacity;
+}
+
+div#amazingArena {
+	grid-area: amazingArena;
+}
+
+div#botanicBase {
+	grid-area: botanicBase;
+}
+
+div#asc {
+	background: #404040;
+	color: inherit;
+}
+
+div#col {
+	background: #000;
+	color: inherit;
+	text-shadow: 2px 2px #606060;
+}
+
+div#hex {
+	background: #202020;
+	color: inherit;
+}
+
+div#error {
+	align-items: center;
+	padding-bottom: 50px;
+	width: 24em;
+}
+
+div#error button.close {
+	bottom: calc(25px + 0.5em);
+	position: absolute;
+	right: 25px;
+}
+
+div#error p {
+	margin: 2em 2em 80px;
+}
+
+div#hexview {
+	max-height: 80%;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+div#hexview>div {
+	display: flex;
+	text-align: left;
+}
+
+div#hexview>div div {
+	font-family: "Lucida Console", "Courier New", monospace;
+	padding: 1em;
+	white-space: pre;
+}
+
+div#hexview p {
+	margin: 0;
+	padding: 1em;
+	text-align: right;
+}
+
+div#marinaMadness {
+	grid-area: marinaMadness;
+}
+
+div#showTimeOfDay {
+	background: #000;
+	border-radius: 0.25em;
+	color: #fff;
+	font-size: 1rem;
+	height: 2em;
+	line-height: 200%;
+	margin: 0 1em;
+	width: 4em;
+}
+
+div#showCharacter {
+	background: #000;
+	border-radius: 50%;
+	color: #fff;
+	font-size: 1.5rem;
+	height: 2em;
+	line-height: 64px;
+	margin: 0 1em;
+	width: 2em;
+}
+
+div#slot {
+	display: flex;
+}
+
+div#slot>div {
+	flex: 50%;
+}
+
+div#speedSlider {
+	grid-area: speedSlider;
+}
+
+div#stages {
+	display: grid;
+	grid-gap: 1em 1em;
+	grid-template-areas:
+		"botanicBase   speedSlider"
+		"marinaMadness technoTower"
+		"amazingArena  amazingArena";
+	grid-template-columns: 50% 50%;
+	grid-template-rows: auto;
+	justify-items: center;
+	margin: auto;
+	width: min-content;
+}
+
+div#stages>div {
+	position: relative;
+}
+
+div#technoTower {
+	grid-area: technoTower;
+}
+
+div.act {
+	background: #000;
+	border-radius: 0.25rem;
+	bottom: 2rem;
+	color: #fff;
+	font-size: 1.5rem;
+	height: 3rem;
+	line-height: 3rem;
+	padding: 0;
+	position: absolute;
+	right: 0;
+	text-align: center;
+	width: 3rem;
+}
+
+div.act.clear {
+	font-size: 1rem;
+	text-transform: uppercase;
+}
+
+div.control {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+div.overlay {
+	background: #606060;
+	border: 8px solid #000;
+	color: #fff;
+	left: 50%;
+	opacity: 0;
+	position: fixed;
+	text-align: center;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	visibility: hidden;
+	z-index: 2;
+}
+
+div.overlay.open {
+	opacity: 1;
+	transition: 0.5s opacity;
+	visibility: visible;
+}
+
+div.range {
+	height: 1em;
+}
+
+div.range input[type="range"], section#section_attractions input[type="range"] {
+	width: 240px;
+}
+
+footer {
+	font-size: 0.75rem;
+	grid-area: footer;
+}
+
+footer, header, main, noscript {
+	text-align: center;
+}
+
+footer, section {
+	padding: 1em;
+}
+
+footer a {
+	background: none;
+	color: #fff;
+}
+
+h1 {
+	background-image: url(title.svg);
+	background-position: 0 0, 8px 8px;
+	background-repeat: no-repeat;
+	background-size: 400px 108px;
+	color: #fff;
+	filter: drop-shadow(4px 4px 0 #000);
+	font-size: 2rem;
+	margin: 1em auto;
+	padding-top: calc(108px + 0.5em);
+	width: 400px;
+}
+
+h1, h2, h3 {
+	font-weight: bold;
+	text-stroke: 1px #000;
+	-webkit-text-stroke: 1px #000;
+}
+
+h2 {
+	background-position: 0 50%;
+	background-repeat: repeat-x;
+	background-size: 2rem auto;
+	color: #ffc040;
+	font-size: 1.5rem;
+	margin: 1em auto;
+	text-shadow: 2px 2px #000;
+}
+
+h2 span {
+	padding: 0 0.5em;
+}
+
+h3 {
+	font-size: 1.25rem;
+}
+
+header {
+	grid-area: header;
+}
+
+html {
+	background: #000 url(bg.png) 100% 100% fixed no-repeat;
+	background-size: cover;
+	color: #fff;
+	font: 12pt/150% Coolvetica, Helvetica, sans-serif;
+	image-rendering: crisp-edges;
+	image-rendering: pixelated;
+	padding: 0;
+	text-shadow: 2px 2px #000;
+}
+
+img#amyrose {
+	bottom: 25px;
+	height: 80px;
+	left: 25px;
+	position: absolute;
+	width: 64px;
+}
+
+img#monitor {
+	height: 32px;
+	width: 28px;
+}
+
+img.preview {
+	border: 6px solid #000;
+	box-shadow: 8px 8px 0 #000;
+	margin: 1em 1em 1.5em;
+	height: 120px;
+	width: 240px;
+}
+
+input#score {
+	width: 8em;
+}
+
+input#specialStage {
+	transition: 0.5s all;
+}
+
+input#specialStage.wireframe {
+	background: #000;
+	border-color: #404040;
+	color: #fff;
+}
+
+input#tick {
+	font-size: 0.75rem;
+	vertical-align: bottom;
+}
+
+input[type="number"], input[type="text"] {
+	background: #fff;
+	border: 6px solid #000;
+	color: #000;
+	font-size: 1.25rem;
+	padding: 0.5em 0.25em;
+}
+
+input[type="number"] {
+	text-align: center;
+	width: 3em;
+}
+
+input[type="range"] {
+	background: transparent;
+	color: #fff;
+	-webkit-appearance: none;
+}
+
+input[type="range"]:focus {
+	outline: 0;
+}
+
+input[type="range"]::-moz-range-thumb {
+	background: #fff;
+	border: 0.5em solid #000;
+	border-radius: 0.25em;
+	color: #000;
+	height: 1.5em;
+	width: 1.5em;
+}
+
+input[type="range"]::-moz-range-track {
+	background: #000;
+	border-radius: 0.25em;
+	color: #fff;
+	height: 1em;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+	background: #000;
+	border-radius: 0.25em;
+	color: #fff;
+	height: 1em;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+	background: #fff;
+	border: 0.5em solid #000;
+	border-radius: 0.25em;
+	color: #000;
+	margin-top: -0.75em;
+	height: 2.5em;
+	width: 2.5em;
+	-webkit-appearance: none;
+}
+
+main {
+	display: grid;
+	grid-gap: 0 0;
+	grid-template-areas:
+		"load        load        load        characters"
+		"slot        playTime    playTime    score"
+		"character   character   chaosRings  chaosRings"
+		"timeOfDay   timeOfDay   chaosRings  chaosRings"
+		"attractions attractions attractions attractions"
+		"barCode     save        save        save";
+	grid-template-columns: 25% 25% 25% 25%;
+	grid-template-rows: auto;
+	margin: auto;
+	width: 60em;
+}
+
+section {
+	border-color: #000;
+	border-style: solid;
+}
+
+section>div {
+	margin: 1em;
+}
+
+section#section_attractions {
+	grid-area: attractions;
+}
+
+section#section_attractions, section#section_attractions h2 span {
+	background: var(--attractions-light);
+	color: inherit;
+}
+
+section#section_attractions, section#section_character, section#section_load,
+section#section_slot, section#section_timeOfDay {
+	border-width: 8px 8px 0;
+}
+
+section#section_attractions h2 {
+	background-image: url(zigzag-violet.svg);
+	text-shadow: 1px 1px var(--attractions-light), 3px 3px var(--attractions-dark);
+}
+
+section#section_barCode {
+	background: #eee url(../images/barcode.png) 50% 50% no-repeat;
+	background-size: 95% auto;
+	border-width: 8px 0 8px 8px;
+	color: #000;
+}
+
+section#section_chaosRings {
+	grid-area: chaosRings;
+}
+
+section#section_chaosRings, section#section_chaosRings h2 span {
+	background: var(--chaosRings-light);
+	color: inherit;
+}
+
+section#section_chaosRings, section#section_playTime, section#section_score {
+	border-width: 8px 8px 0 0;
+}
+
+section#section_chaosRings h2 {
+	background-image: url(zigzag-green.svg);
+	text-shadow: 1px 1px var(--chaosRings-light), 3px 3px var(--chaosRings-dark);
+}
+
+section#section_character {
+	grid-area: character;
+}
+
+section#section_character, section#section_character h2 span {
+	background: var(--character-light);
+	color: inherit;
+}
+
+section#section_character h2 {
+	background-image: url(zigzag-orange.svg);
+	text-shadow: 1px 1px var(--character-light), 3px 3px var(--character-dark);
+}
+
+section#section_characters {
+	border-width: 8px 8px 0 0;
+	font-size: 1.25rem;
+	text-align: center;
+	text-shadow: none;
+}
+
+section#section_characters, section#section_characters li span {
+	background: var(--characters);
+	color: #000;
+}
+
+section#section_characters li {
+	height: 1em;
+	position: relative;
+}
+
+section#section_characters li:last-child {
+	border-top: 6px solid #000;
+	height: 0;
+}
+
+section#section_characters li:not(:last-child) {
+	border-color: #000;
+	border-style: solid;
+	border-width: 6px 6px 0;
+}
+
+section#section_characters li div {
+	left: 0;
+	position: absolute;
+	text-align: center;
+	top: -0.75em;
+	width: 100%;
+}
+
+section#section_characters li span {
+	padding: 0 0.25em;
+}
+
+section#section_characters ul {
+	line-height: 100%;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+section#section_load {
+	grid-area: load;
+}
+
+section#section_load, section#section_load h2 span {
+	background: var(--load-light);
+	color: inherit;
+}
+
+section#section_load h2 {
+	background-image: url(zigzag-red.svg);
+	text-shadow: 1px 1px var(--load-light), 3px 3px var(--load-dark);
+}
+
+section#section_playTime {
+	font-size: 1.5rem;
+	grid-area: playTime;
+}
+
+section#section_playTime, section#section_playTime h2 span {
+	background: var(--playTime-light);
+	color: inherit;
+}
+
+section#section_playTime h2 {
+	background-image: url(zigzag-blue.svg);
+	text-shadow: 1px 1px var(--playTime-light), 3px 3px var(--playTime-dark);
+}
+
+section#section_save {
+	border-width: 8px;
+	grid-area: save;
+}
+
+section#section_save, section#section_save h2 span {
+	background: var(--save-light);
+	color: inherit;
+}
+
+section#section_save button {
+	background: #000;
+	color: #fff;
+	margin: 0 0.5em;
+	padding: 0.5em 4em;
+}
+
+section#section_save h2 {
+	background-image: url(zigzag-green.svg);
+	text-shadow: 1px 1px var(--save-light), 3px 3px var(--save-dark);
+}
+
+section#section_score {
+	grid-area: score;
+}
+
+section#section_score, section#section_score h2 span {
+	background: var(--score-light);
+	color: inherit;
+}
+
+section#section_score h2 {
+	background-image: url(zigzag-violet.svg);
+	text-shadow: 1px 1px var(--score-light), 3px 3px var(--score-dark);
+}
+
+section#section_slot, section#section_slot h2 span {
+	background: var(--slot-light);
+	color: inherit;
+	grid-area: slot;
+}
+
+section#section_slot h2 {
+	background-image: url(zigzag-black.svg);
+	text-shadow: 1px 1px var(--slot-light), 3px 3px var(--slot-dark);
+}
+
+section#section_timeOfDay {
+	grid-area: timeOfDay;
+}
+
+section#section_timeOfDay, section#section_timeOfDay h2 span {
+	background: var(--timeOfDay-light);
+	color: inherit;
+}
+
+section#section_timeOfDay h2 {
+	background-image: url(zigzag-blue.svg);
+	text-shadow: 1px 1px var(--timeOfDay-light), 3px 3px var(--timeOfDay-dark);
+}
+
+section.active h2 {
+	animation: scroll 10s linear infinite;
+}
+
+table {
+	margin: auto;
+	text-align: left;
+	width: 50%;
+}
+
+th {
+	background: none;
+	color: #ffa0ff;
+}
+
+@media (max-width: 960px) {
+	div#chaosRings {
+		display: flex;
+		justify-content: center;
+	}
+
+	main {
+		display: flex;
+		flex-direction: column;
+		width: 80%;
+	}
+
+	section#section_chaosRings, section#section_playTime,
+	section#section_score {
+		border-left-width: 8px;
+	}
+
+	section#section_barCode, section#section_characters {
+		display: none;
+	}
+}
+
+@media (max-width: 768px) {
+	main {
+		width: 90%;
+	}
+}
+
+@media (max-width: 640px) {
+	div#stages {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+@media (prefers-reduced-motion) {
+	section.active h2 {
+		animation: none;
+	}
+}
